@@ -1,19 +1,77 @@
+import org.springframework.boot.gradle.plugin.SpringBootPlugin
+
 plugins {
+    // id 'idea'
     id 'java'
+    // id 'java-library'
+    id 'org.springframework.boot' version '2.7.2' apply(false)
+    id 'io.spring.dependency-management' version '1.0.12.RELEASE' apply(false)
+    id "io.freefair.lombok" version "6.5.0.3" apply(false)
+
 }
 
-group 'com.dou'
-version '1.0-SNAPSHOT'
-
 repositories {
+    maven { url 'https://maven.aliyun.com/repository/public' }
+    maven { url 'https://maven.aliyun.com/repository/google' }
+    maven { url 'https://maven.aliyun.com/repository/spring' }
+    maven { url 'https://maven.aliyun.com/repository/spring-plugin' }
+    maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
+    mavenLocal()
     mavenCentral()
 }
 
-dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+ext {
+    springCloudVersion= "2021.0.3"
+    springCloudTencentVersion= "1.6.0-2021.0.3"
 }
 
-test {
-    useJUnitPlatform()
+
+allprojects {
+
+    apply plugin: 'idea'
+    apply plugin: 'java'
+    // apply plugin: 'java-library'
+    // apply plugin: 'java-platform'
+    apply plugin: "io.freefair.lombok"
+
+    group 'com.dou'
+    version '1.0-SNAPSHOT'
+
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+
+
+
 }
+
+subprojects {
+    // 不是springboot的项目不需要引入相关依赖
+    if(project.name != 'common' ){
+        println project.name + ' add plugin [org.springframework.boot]'
+        println project.name + ' add plugin [io.spring.dependency-management]'
+
+        apply plugin: 'org.springframework.boot'
+        apply plugin: "io.spring.dependency-management"
+
+        dependencyManagement {
+            imports {
+                // 仅是为了要依赖管理，而不需要插件的功能，你可以使用SpringBootPlugin提供的BOM_COORDINATES来进行依赖管理控制也可以达到效果
+                mavenBom(SpringBootPlugin.BOM_COORDINATES)
+                mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+                mavenBom "com.tencent.cloud:spring-cloud-tencent-dependencies:${springCloudTencentVersion}"
+            }
+        }
+    }
+
+}
+
+
+
+// dependencies {
+//     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.0'
+//     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.0'
+// }
+//
+// test {
+//     useJUnitPlatform()
+// }
