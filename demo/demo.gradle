@@ -1,0 +1,28 @@
+
+
+dependencies {
+    api platform(project(':platform'))
+
+    api 'com.google.guava:guava'
+
+    // 解决springboot使用默认cache的警告
+    implementation 'com.github.ben-manes.caffeine:caffeine'
+    implementation 'org.springframework:spring-context-support'
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'com.tencent.cloud:spring-cloud-starter-tencent-polaris-discovery'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+// dependencies {
+//     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.0'
+//     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.0'
+// }
+//
+// test {
+//     useJUnitPlatform()
+// }
