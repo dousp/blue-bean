@@ -11,6 +11,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'com.tencent.cloud:spring-cloud-starter-tencent-polaris-discovery'
+    implementation 'com.tencent.cloud:spring-cloud-starter-tencent-polaris-config'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
