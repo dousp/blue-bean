@@ -11,25 +11,27 @@ import org.springframework.web.bind.annotation.RestController;
 @RefreshScope
 public class DemoController {
 
-    @Value("${demo.desc}")
+    @Value("${base.desc}")
     private String info;
     @Value("${base.area}")
     private String area;
     @Value("${base.idc}")
     private String idc;
 
-    @Value("${demo}")
-    private String demo;
-
 
     @GetMapping("")
     public String demo() {
-        return demo;
+        return info;
     }
 
-    @GetMapping("meta")
+    @GetMapping("/meta")
     public String meta() {
         return info + "==" + area + "==" + idc;
+    }
+
+    @GetMapping("/circuitbreaker")
+    public String circuitbreaker() {
+        throw new RuntimeException("我访问出问题了");
     }
 
 }
