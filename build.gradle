@@ -1,5 +1,5 @@
 plugins {
-    id 'java'
+    id 'idea'
     // id 'java-library'
     id 'org.springframework.boot' version '2.6.10' apply(false)
     id 'io.spring.dependency-management' version '1.0.12.RELEASE' apply(false)
@@ -29,8 +29,7 @@ allprojects {
     group 'com.dou.blue.bean'
     version '1.0-SNAPSHOT'
 
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+
 
 }
 
@@ -42,9 +41,8 @@ subprojects {
     if (project.name == 'platform') {
         apply plugin: 'maven-publish'
         apply plugin: 'java-platform'
-
         println project.name + ' add plugin [java-platform]'
-    } else {
+    } else if (project.name != 'demo') {
         apply plugin: 'java'
         apply plugin: 'java-library'
         apply plugin: "io.freefair.lombok"
@@ -52,6 +50,10 @@ subprojects {
         // apply plugin: "io.spring.dependency-management"
         // println project.name + ' add plugin [org.springframework.boot]'
         // println project.name + ' add plugin [io.spring.dependency-management]'
+
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+
     }
 
 

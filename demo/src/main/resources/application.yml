@@ -1,9 +1,0 @@
-spring:
-  cloud:
-    loadbalancer:
-      configurations: polaris # 2020.0.x SDK需要添加这个配置
-    polaris:
-      ratelimit:
-        rejectRequestTips: 请求过于频繁，请稍后再试！
-        rejectHttpCode: 429
-        rejectRequestTipsFilePath: TooManyRequest.html

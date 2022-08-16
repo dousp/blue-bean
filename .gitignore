@@ -38,4 +38,6 @@ bin/
 ### Mac OS ###
 .DS_Store
 polaris
-#/**/build/
+/**/build/
+/**/**/polaris/
+/**/**/build/
