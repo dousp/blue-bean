@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: demo
+  profiles:
+    active: dev1
+    # 这个属性不能用，是个bug
+    # default: dev1
+  cloud:
+    tencent:
+      metadata:
+        content:
+          idc: bj
+          env: dev
+    polaris:
+      address: grpc://127.0.0.1:28091
+      namespace: default
+      config:
+        address: grpc://127.0.0.1:28093 # 选填，只有在配置中心和注册中心是两个不同的地址时才需要配置
+        auto-refresh: true # 选填，当配置发布后，动态刷新 Spring 上下文，默认值为 true面
+        groups:
+          - name: ${spring.application.name} # 选填，注入自定义配置的配置分组
+            files: [ "common/base.yml" ] # 注入自定义配置文件列表，当 key 冲突时，排在前面的配置文件优先级高于后面
