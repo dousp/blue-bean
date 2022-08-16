@@ -13,6 +13,10 @@ dependencies {
     implementation 'com.tencent.cloud:spring-cloud-starter-tencent-polaris-ratelimit'
     implementation 'com.tencent.cloud:spring-cloud-starter-tencent-polaris-circuitbreaker'
 
+    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+    // implementation 'org.springframework.cloud:spring-cloud-starter-netflix-ribbon'
+
+
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 

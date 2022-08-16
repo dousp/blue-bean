@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: demo-b
+  cloud:
+    tencent:
+      metadata:
+        content:
+          idc: bj
+          env: dev
+    polaris:
+      address: grpc://127.0.0.1:28091
+      namespace: default
+server:
+  port: 8088

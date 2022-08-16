@@ -1,8 +1,3 @@
-// plugins {
-//     id 'java-platform'
-//     // 发布插件，可用来发布 BOM 或 jar到本地与远程仓库
-//     id 'maven-publish'
-// }
 
 // 默认为防止用户错误地引入依赖，而不是引入依赖约束，如果引入依赖会报错失败。
 // 通过这个配置可以让Gradle允许引入依赖，当然这是可选的
@@ -12,7 +7,7 @@ javaPlatform {
 
 dependencies {
     api platform("org.springframework.boot:spring-boot-dependencies:${springBootVersion}")
-    // api platform("org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}")
+    api platform("org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}")
     api platform("com.tencent.cloud:spring-cloud-tencent-dependencies:${springCloudTencentVersion}")
 
     //在constraints块中定义依赖版本约束

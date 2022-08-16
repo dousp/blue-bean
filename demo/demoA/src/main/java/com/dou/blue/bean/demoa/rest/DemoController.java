@@ -5,6 +5,9 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
+
+import javax.annotation.Resource;
 
 @RestController
 @RequestMapping("")
@@ -18,6 +21,11 @@ public class DemoController {
     @Value("${base.idc}")
     private String idc;
 
+    @Resource
+    private DemoFeign demoFeign;
+    @Resource
+    private RestTemplate restTemplate;
+
 
     @GetMapping("")
     public String demo() {
@@ -29,9 +37,14 @@ public class DemoController {
         return info + "==" + area + "==" + idc;
     }
 
-    @GetMapping("/circuitbreaker")
-    public String circuitbreaker() {
-        throw new RuntimeException("我访问出问题了");
+    @GetMapping("/getDemoBByFeign")
+    public String getDemoBByFeign() {
+        return demoFeign.circuitbreaker();
+    }
+
+    @GetMapping("/getDemoBByRestTemplate")
+    public String getDemoBByRestTemplate() {
+        return restTemplate.getForObject("demo-b/circuitbreaker", String.class);
     }
 
 }

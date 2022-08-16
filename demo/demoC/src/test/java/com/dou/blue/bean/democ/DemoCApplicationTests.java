@@ -1,4 +1,4 @@
-package com.dou.blue.bean.demoa;
+package com.dou.blue.bean.democ;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

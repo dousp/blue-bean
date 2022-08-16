@@ -1,17 +1,23 @@
-rootProject.name = 'blue-bean'
-
 include 'platform'
 include ':demo:demoA'
 include ':demo:demoB'
 include ':demo:demoC'
 
+rootProject.name = 'blue-bean'
+println("> Project gradle file loadding :")
 rootProject.children.each { project ->
-    println("project loadding...${project.name}")
+    println("project loadding -> ${project.name}")
     project.buildFileName = "${project.name}.gradle"
+    setBuildFileName(project)
+}
 
-    project.getChildren().each { it ->
-        println("project loadding...${it.name}")
-        it.buildFileName = it.name + '.gradle'
+def setBuildFileName(project) {
+    project.children.each { childProject ->
+        println("childProject loadding -> ${childProject.name}")
+        childProject.buildFileName = "${childProject.name}.gradle"
+        assert childProject.projectDir.isDirectory()
+        assert childProject.buildFile.isFile()
+        setBuildFileName(childProject)
     }
 }
 
