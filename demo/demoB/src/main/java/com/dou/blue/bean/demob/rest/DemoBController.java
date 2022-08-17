@@ -13,7 +13,8 @@ public class DemoBController {
 
     @GetMapping("/circuitbreaker")
     public String circuitbreaker() {
-        throw new RuntimeException("我访问出问题了");
+        return "我 demo B 没问题了";
+        // throw new RuntimeException("我访问出问题了->demo C");
     }
 
 }
