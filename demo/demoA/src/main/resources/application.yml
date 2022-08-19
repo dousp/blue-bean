@@ -1,0 +1,10 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - polaris-discovery
+          - polaris-config
+          - polaris-metadata
+          - polaris-ratelimit
+          - polaris-router
